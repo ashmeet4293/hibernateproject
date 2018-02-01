@@ -24,11 +24,12 @@
         <property name="hibernate.format_sql">true</property>
 
         <!--Drop and re-create the database schema on startup -->
-        <property name="hibernate.hbm2ddl.auto">create</property>
+        <property name="hibernate.hbm2ddl.auto">update</property>
 
         <!--Name the annoted entity class -->
         <mapping class="entities.Student"/>
         <mapping class="entities.Address"/>
+        <mapping class="entities.Vehicle"/>
 
     </session-factory>
 </hibernate-configuration>

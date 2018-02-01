@@ -1,5 +1,6 @@
 import entities.Address;
 import entities.Student;
+import entities.Vehicle;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -14,12 +15,24 @@ public class MainClass {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
 
-        Student student=new Student("ram","Pokhara");
+        Student student=new Student("Shyam","Kathmandu");
 
-        Address address=new Address("Pokhara","Srijanachowk");
-        address.setStudent(student);
+        session.save(student);
 
-        session.save(address);
+        Vehicle vehicle=new Vehicle("car");
+        Vehicle vehicle1=new Vehicle("Bike");
+
+
+        vehicle.setStudent(student);
+        vehicle1.setStudent(student);
+
+        student.getVehicles().add(vehicle);
+        student.getVehicles().add(vehicle1);
+
+        session.save(vehicle);
+        session.save(vehicle1);
+
+
 
         session.getTransaction().commit();
         session.close();
