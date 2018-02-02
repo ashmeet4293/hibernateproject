@@ -19,8 +19,13 @@ public class Student {
     @Column(name="Address")
     private String address;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "student")
-    Set<Vehicle> vehicles = new HashSet<Vehicle>(0);
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "student_project",
+            joinColumns = { @JoinColumn(name = "student_id") },
+            inverseJoinColumns = { @JoinColumn(name = "project_id") }
+    )
+    Set<Project> projects = new HashSet<Project>();
 
 
 
@@ -58,11 +63,11 @@ public class Student {
         this.address = address;
     }
 
-    public Set<Vehicle> getVehicles() {
-        return vehicles;
+    public Set<Project> getProjects() {
+        return projects;
     }
 
-    public void setVehicles(Set<Vehicle> vehicles) {
-        this.vehicles = vehicles;
+    public void setProjects(Set<Project> projects) {
+        this.projects = projects;
     }
 }
